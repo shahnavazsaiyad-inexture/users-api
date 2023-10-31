@@ -1,3 +1,5 @@
+CREATE DATABASE training;
+
 CREATE TABLE `user` (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(20) NOT NULL UNIQUE,
@@ -29,3 +31,17 @@ CREATE TABLE reset_password_token (
     is_used BOOL,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
+
+
+DELIMITER //
+CREATE TRIGGER `delete_address_before_user` BEFORE DELETE ON `user` FOR EACH ROW 
+BEGIN
+    DELETE FROM address WHERE address.user_id = OLD.user_id;
+    DELETE FROM reset_password_token WHERE reset_password_token.user_id = OLD.user_id;
+END//
+DELIMITER ;
+
+
+INSERT INTO training.`user` (username,first_name,last_name,email,`role`,password) VALUES
+('admin','inexture','admin','shahnavazsaiyad@inexture.com','Admin','�iv�A���M�߱g��s�K��o*�H�');
+

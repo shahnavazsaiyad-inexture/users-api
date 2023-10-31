@@ -1,7 +1,6 @@
 package com.inexture.users.pojo;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;

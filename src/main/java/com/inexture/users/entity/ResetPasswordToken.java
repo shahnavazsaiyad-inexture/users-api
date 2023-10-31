@@ -15,6 +15,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entity class for reset_password_token table
+ */
 @Entity
 @Table(name =  "reset_password_token")
 @Getter @Setter @NoArgsConstructor

@@ -8,6 +8,9 @@ import com.inexture.users.repository.ResetPasswordTokenRepository;
 import com.inexture.users.repository.UserRepository;
 import com.inexture.users.utils.ApplicationUtils;
 
+/**
+ * Base class for all services that holds common dependencies and repositories
+ */
 @Service
 public abstract class BaseService {
 

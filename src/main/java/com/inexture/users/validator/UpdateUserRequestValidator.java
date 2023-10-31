@@ -12,6 +12,9 @@ import com.inexture.users.pojo.UserPojo;
 import com.inexture.users.service.UserService;
 import com.inexture.users.utils.ApplicationUtils;
 
+/**
+ * This class provides custom Spring Validator for Update User request
+ */
 @Component
 public class UpdateUserRequestValidator implements Validator {
 
@@ -24,6 +27,9 @@ public class UpdateUserRequestValidator implements Validator {
 		return clazz.equals(UserPojo.class);
 	}
 
+	/**
+	 * This method validates update user request and add appropreate error code 
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 
@@ -47,6 +53,13 @@ public class UpdateUserRequestValidator implements Validator {
 		}
 	}
 
+	/**
+	 * This method is used to validate email field
+	 * 
+	 * @param errors
+	 * @param email
+	 * @param userId
+	 */
 	private void validateEmail(Errors errors, String email,  Integer userId) {
 		if(ApplicationUtils.isEmpty(email)) {
 			errors.rejectValue("email", "error.field.empty");
@@ -64,6 +77,13 @@ public class UpdateUserRequestValidator implements Validator {
 		
 	}
 
+	/**
+	 * This method is used to validate username field
+	 * 
+	 * @param errors
+	 * @param username
+	 * @param userId
+	 */
 	private void validateUsername(Errors errors, String username, Integer userId) {
 		if(ApplicationUtils.isEmpty(username)) {
 			errors.rejectValue("username", "error.field.empty");

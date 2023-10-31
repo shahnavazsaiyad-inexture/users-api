@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,6 +17,10 @@ import com.inexture.users.validator.RegistrationRequestValidator;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class provide endpoint related to registration API
+ * 
+ */
 @RestController
 @Slf4j
 public class RegistrationController extends BaseController {
@@ -25,11 +28,23 @@ public class RegistrationController extends BaseController {
 	@Autowired
 	private RegistrationRequestValidator registrationRequestValidator;
 
+	/**
+	 * This method configures InitBinder for registration request validator
+	 * 
+	 * @param binder
+	 */
 	@InitBinder("userPojo")
 	public void initBinderUserPojo(WebDataBinder binder) {
 		binder.addValidators(registrationRequestValidator);
 	}
 	
+	/**
+	 * This method provide API for new user registration
+	 * 
+	 * @param userPojo
+	 * @param bindingResult
+	 * @return
+	 */
 	@PostMapping("/register")
 	public ResponseEntity<APIResponse> register(@Validated @RequestBody UserPojo userPojo, BindingResult bindingResult){
 		

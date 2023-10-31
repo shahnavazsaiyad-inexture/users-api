@@ -8,7 +8,9 @@ import org.springframework.validation.Validator;
 
 import com.inexture.users.pojo.LoginRequest;
 import com.inexture.users.utils.ApplicationUtils;
-
+/**
+ * This class provides custom Spring Validator for Login request
+ */
 @Component
 public class LoginRequestValidator implements Validator {
 
@@ -17,6 +19,9 @@ public class LoginRequestValidator implements Validator {
 		return clazz.equals(LoginRequest.class);
 	}
 
+	/**
+	 * This method validates login request and add appropreate error code 
+	 */
 	@Override
 	public void validate(Object target, Errors errors) {
 		

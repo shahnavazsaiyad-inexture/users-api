@@ -25,6 +25,9 @@ import jakarta.mail.internet.MimeMessage.RecipientType;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class provide Service implementation for ResetPasswordTokenService
+ */
 @Service
 @Slf4j
 @Transactional
@@ -39,6 +42,9 @@ public class ResetPasswordTokenServiceImpl extends BaseService implements ResetP
 	@Value("${mail.send.from}")
 	private String mailSendFrom;
 	
+	/**
+	 * @see ResetPasswordTokenService#generateAndSendToken(User)
+	 */
 	@Override
 	public void generateAndSendToken(User user) {
 		try {
@@ -55,11 +61,12 @@ public class ResetPasswordTokenServiceImpl extends BaseService implements ResetP
 			
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-		}
-		
-	
+		}	
 	}
 	
+	/**
+	 * This method is used to send an Email to user with reset password link
+	 */
 	private void sendResetPasswordEmail(String email, String token) {
 		String resetUrl = resetPasswordUrl+token;
 		
@@ -84,6 +91,9 @@ public class ResetPasswordTokenServiceImpl extends BaseService implements ResetP
 		}
 	}
 
+	/**
+	 * @see ResetPasswordTokenService#resetPassword(ResetPasswordRequest, APIResponse)
+	 */
 	@Override
 	public void resetPassword(ResetPasswordRequest resetPasswordRequest, APIResponse response) {
 		try {

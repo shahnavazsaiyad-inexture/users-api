@@ -13,12 +13,21 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * This class provide Configuration beans for application
+ * 
+ */
 @Configuration
 public class ApplicationConfig {
 
 	@Autowired
 	private Environment environment;
 	
+	/**
+	 * MessageSource bean for message.properties
+	 * 
+	 * @return 
+	 */
 	@Bean
 	public MessageSource messageSource() {
 	    ReloadableResourceBundleMessageSource messageSource
@@ -29,6 +38,11 @@ public class ApplicationConfig {
 	    return messageSource;
 	}
 	
+	/**
+	 * JavaMailSender bean which is used to send email
+	 * 
+	 * @return 
+	 */
 	@Bean
 	public JavaMailSenderImpl javaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -46,6 +60,10 @@ public class ApplicationConfig {
 	    return mailSender;
 	}
 	
+	/**
+	 * corsFilter bean to alow CrossOrigin requests
+	 * @return
+	 */
 	@Bean
 	public CorsFilter corsFilter() {
 

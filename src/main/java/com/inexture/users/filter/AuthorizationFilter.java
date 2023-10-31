@@ -22,6 +22,9 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * This class is a ServletFilter to provide CORS related headers and Authorize requests with authorization header
+ */
 @Component
 public class AuthorizationFilter implements Filter {
 

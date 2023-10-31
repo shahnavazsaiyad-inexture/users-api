@@ -14,6 +14,10 @@ import com.auth0.jwt.interfaces.JWTVerifier;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class provide utility methods related to JWT
+ * 
+ */
 @Component
 @Slf4j
 public class JwtUtility {
@@ -21,6 +25,14 @@ public class JwtUtility {
 	@Value("${jwt.secret}")
 	private String secret;
 	
+	/**
+	 * This method is used to generate JWT token
+	 * 
+	 * @param username
+	 * @param role
+	 * @param userId
+	 * @return
+	 */
 	public String createToken(String username, String role, String userId) {
 		try {
 			
@@ -42,7 +54,12 @@ public class JwtUtility {
 		return null;
 	}
 	
-	
+	/**
+	 * This method is used to decode JWT token
+	 * 
+	 * @param token
+	 * @return
+	 */
 	public DecodedJWT decodeToken(String token) {
 		DecodedJWT decodedJWT = null;
 		try {

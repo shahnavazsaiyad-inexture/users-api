@@ -14,6 +14,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Entity class for address table
+ */
 @Entity
 @Table(name = "address")
 @Getter @Setter @NoArgsConstructor

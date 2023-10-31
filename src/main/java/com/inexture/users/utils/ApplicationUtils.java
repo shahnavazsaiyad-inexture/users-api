@@ -19,6 +19,9 @@ import com.inexture.users.pojo.APIResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class provide utility methods for application
+ */
 @Component
 @Slf4j
 public class ApplicationUtils {
@@ -29,6 +32,12 @@ public class ApplicationUtils {
 	@Autowired
 	private ObjectMapper objectMapper;
 
+	/**
+	 * This method is used to generate a Json String from object
+	 * 
+	 * @param obj
+	 * @return
+	 */
 	public String generateJsonFromObject(Object obj) {
 		String jsonString = null;
 		try {
@@ -41,6 +50,13 @@ public class ApplicationUtils {
 		return jsonString;
 	}
 	
+	/**
+	 * This method is used to generate object from Json String
+	 * 
+	 * @param jsonString
+	 * @param clazz
+	 * @return
+	 */
 	public Object generateObjectFromJson(String jsonString, Class clazz) {
 		Object obj = null;
 		try {
@@ -53,7 +69,12 @@ public class ApplicationUtils {
 		return jsonString;
 	}
 	
-	
+	/**
+	 * This method is used to generate error API response from BindingResult object
+	 * 
+	 * @param bindingResult
+	 * @return
+	 */
 	public ResponseEntity<APIResponse> generateErrorResponse(BindingResult bindingResult) {
 	
 		Map<String, String> errorMap = new HashMap<>();		
@@ -65,34 +86,72 @@ public class ApplicationUtils {
 		return ResponseEntity.ok(APIResponse.builder().isError(true).message("Validation Error!").data(errorMap).build());
 	}
 	
-	
-	
+	/**
+	 * This method is used to check if a collection is null or empty
+	 * 
+	 * @param collection
+	 * @return
+	 */
 	public static boolean isEmpty(Collection collection) {
 		return Objects.isNull(collection) || collection.isEmpty();
 	}
 
+	/**
+	 * This method is used to generate API response with all Fields
+	 * 
+	 * @param isError
+	 * @param message
+	 * @param data
+	 * @return
+	 */
 	public static APIResponse generateResponse(boolean isError, String message, Object data) {
 		
 		return APIResponse.builder().message(message).data(data).isError(isError).build();
 	}
 	
+	/**
+	 * This method is used to generate API response with isError and data field
+	 * 
+	 * @param isError
+	 * @param data
+	 * @return
+	 */
 	public static APIResponse generateResponse(boolean isError, Object data) {
 		
 		return APIResponse.builder().data(data).isError(isError).build();
 	}
 	
-
+	/**
+	 * This method is used to generate API response with isError and message field
+	 * 
+	 * @param isError
+	 * @param message
+	 * @return
+	 */
 	public static APIResponse generateResponse(boolean isError, String message) {
 		
 		return APIResponse.builder().message(message).isError(isError).build();
 	}
 
+	/**
+	 * This method is used to hash a password
+	 * 
+	 * @param plainText
+	 * @return
+	 * @throws NoSuchAlgorithmException
+	 */
 	public static String hashPassword(String plainText) throws NoSuchAlgorithmException {
 		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
 		
 		return new String(messageDigest.digest(plainText.getBytes()));
 	}
 
+	/**
+	 * This method is used to check if a string is null or empty
+	 * 
+	 * @param text
+	 * @return
+	 */
 	public static boolean isEmpty(String text) {
 		return Objects.isNull(text) || text.isEmpty();
 	}

@@ -18,6 +18,10 @@ import com.inexture.users.pojo.LoginResponse;
 import com.inexture.users.utils.ApplicationUtils;
 import com.inexture.users.validator.LoginRequestValidator;
 
+/**
+ * This class provide endpoint related to login API
+ * 
+ */
 @RestController
 public class LoginController extends BaseController {
 
@@ -25,12 +29,23 @@ public class LoginController extends BaseController {
 	@Autowired
 	private LoginRequestValidator loginRequestValidator;
 
+	/**
+	 * This method configures an InitBinder for login request validator
+	 * 
+	 * @param binder
+	 */
 	@InitBinder("loginRequest")
 	public void initBinderLoginRequest(WebDataBinder binder) {
 		binder.addValidators(loginRequestValidator);
 	}
 	
-
+	/**
+	 * This method provide API for user login
+	 * 
+	 * @param loginRequest
+	 * @param bindingResult
+	 * @return
+	 */
 	@PostMapping("/login")
 	public ResponseEntity<APIResponse> login(@Validated @RequestBody LoginRequest loginRequest, BindingResult bindingResult){
 		

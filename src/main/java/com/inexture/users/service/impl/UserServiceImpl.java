@@ -23,6 +23,9 @@ import com.inexture.users.utils.JwtUtility;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * This class is service implementation for UserService
+ */
 @Service
 @Transactional
 @Slf4j
@@ -32,6 +35,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@Autowired
 	private JwtUtility jwtUtility;
 
+	/**
+	 * @see UserService#getAll()
+	 */
 	@Override
 	public List<UserPojo> getAll() {
 		List<User> userEntities = userRepository.findAll();
@@ -42,7 +48,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return List.of();
 	}
 	
-
+	/**
+	 * @see UserService#getById(Integer)
+	 */
 	@Override
 	public Optional<UserPojo> getById(Integer userId) {
 
@@ -54,11 +62,17 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return Optional.empty();
 	}
 	
+	/**
+	 * @see UserService#getByUsername(String)
+	 */
 	@Override
 	public Optional<User> getByUsername(String username) {
 		return userRepository.findByUsername(username);
 	}
 
+	/**
+	 * @see UserService#create(UserPojo)
+	 */
 	@Override
 	public boolean create(UserPojo userPojo) {
 		try {
@@ -77,6 +91,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return false;
 	}
 	
+	/**
+	 * @see UserService#login(LoginRequest)
+	 */
 	@Override
 	public Optional<LoginResponse> login(LoginRequest loginRequest) {
 
@@ -107,7 +124,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 	}
 
 
-
+	/**
+	 * @see UserService#update(UserPojo)
+	 */
 	@Override
 	public boolean update(UserPojo userPojo) {
 		try {
@@ -153,7 +172,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return false;
 	}	
 
-
+	/**
+	 * @see UserService#deleteById(Integer)
+	 */
 	@Override
 	public boolean deleteById(Integer userId) {
 		try{
@@ -164,30 +185,45 @@ public class UserServiceImpl extends BaseService implements UserService {
 		}
 		return false;
 	}
-
+	
+	/**
+	 * @see UserService#countByUsername(String)
+	 */
 	@Override
 	public long countByUsername(String username) {
 		return userRepository.countByUsername(username);
 	}
 	
-
+	/**
+	 * @see UserService#countByEmail(String)
+	 */
 	@Override
 	public long countByEmail(String email) {
 		return userRepository.countByEmail(email);
 	}
 
-
+	/**
+	 * @see UserService#countByUsernameAndIdNot(String, Integer)
+	 */
 	@Override
 	public long countByUsernameAndIdNot(String username, Integer userId) {
 		return userRepository.countByUsernameAndIdNot(username, userId);
 	}
 
-
+	/**
+	 * @see UserService#countByEmailAndIdNot(String, Integer)
+	 */
 	@Override
 	public long countByEmailAndIdNot(String email, Integer userId) {
 		return userRepository.countByEmailAndIdNot(email, userId);
 	}
 
+	/**
+	 * This method is used to convert User Entity to UserPojo
+	 * 
+	 * @param user
+	 * @return
+	 */
 	private UserPojo entityToPojo(User user) {
 		if(Objects.isNull(user)) {
 			return null;

@@ -7,6 +7,9 @@ import com.inexture.users.service.ResetPasswordTokenService;
 import com.inexture.users.service.UserService;
 import com.inexture.users.utils.ApplicationUtils;
 
+/**
+ * This class is a base class for all controllers which holds common dependencies.
+ */
 @Controller
 public abstract class BaseController {
 

@@ -16,10 +16,21 @@ Steps to setup project:
 API endpoints:
 
 Register new User: /register	POST
+
 User Login: /login	POST
+
 Send Reset Password Link: /resetpassword/{username}	GET
+
 Reset Password: /resetpassword	POST
-List user: /users	GET
-Get user by id: /users/{userId}	GET
-Update user: /users	POST
-Delete user: /users/{userId}	DELETE
+
+List user: /users	GET (Authorization header)
+
+Get user by id: /users/{userId}	GET (Authorization header)
+
+Update user: /users	POST (Authorization header)
+
+Delete user: /users/{userId}	DELETE (Authorization header)
+
+
+
+Some APIs require Authorization header, we can pass JWT token returned in login API as Bearer token

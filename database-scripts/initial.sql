@@ -1,4 +1,5 @@
 CREATE DATABASE training;
+use training;
 
 CREATE TABLE `user` (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,7 +19,7 @@ CREATE TABLE address (
     city VARCHAR(100),
     state VARCHAR(100),
     country VARCHAR(100),
-    pincode VARCHAR(10),
+    pincode INT,
     FOREIGN KEY (user_id) REFERENCES user(user_id)
 );
 

@@ -85,7 +85,8 @@ public class UserServiceImpl extends BaseService implements UserService {
 			if(!Objects.isNull(savedUser)) {
 				return true;
 			}
-		}catch(Exception e) {
+		}
+		catch(Exception e) {
 			log.error(e.getMessage(), e);
 		}
 		return false;

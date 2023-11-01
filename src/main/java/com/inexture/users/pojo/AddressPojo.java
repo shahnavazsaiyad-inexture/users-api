@@ -22,7 +22,7 @@ public class AddressPojo implements Serializable{
 	private String city;
 	private String state;
 	private String country;
-	private String pincode;
+	private Integer pincode;
 	
 	public Address toEntity() {
 		Address address = new Address();

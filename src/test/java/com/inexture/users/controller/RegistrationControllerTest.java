@@ -1,9 +1,7 @@
 package com.inexture.users.controller;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -12,24 +10,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.validation.Errors;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.inexture.users.entity.Address;
 import com.inexture.users.pojo.AddressPojo;
 import com.inexture.users.pojo.UserPojo;
-import com.inexture.users.service.ResetPasswordTokenService;
-import com.inexture.users.service.UserService;
-import com.inexture.users.utils.ApplicationUtils;
-import com.inexture.users.utils.JwtUtility;
-import com.inexture.users.validator.RegistrationRequestValidator;
 
 @WebMvcTest(RegistrationController.class)
 class RegistrationControllerTest extends BaseControllerTest{
@@ -95,7 +79,7 @@ class RegistrationControllerTest extends BaseControllerTest{
 		AddressPojo address = new AddressPojo();
 		address.setStreet("Test Street");
 		address.setCity("Test");
-		address.setPincode("380000");
+		address.setPincode(380000);
 		userPojo.getAddresses().add(address);
 		return userPojo;
 	}

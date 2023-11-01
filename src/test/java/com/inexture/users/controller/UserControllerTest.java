@@ -1,10 +1,10 @@
 package com.inexture.users.controller;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -12,36 +12,22 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import org.springframework.http.HttpHeaders;
-
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.http.HttpHeaders;
 import org.springframework.test.web.servlet.MvcResult;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.auth0.jwt.interfaces.JWTVerifier;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inexture.users.pojo.AddressPojo;
 import com.inexture.users.pojo.UserPojo;
-import com.inexture.users.service.ResetPasswordTokenService;
-import com.inexture.users.service.UserService;
-import com.inexture.users.utils.ApplicationUtils;
-import com.inexture.users.utils.JwtUtility;
-import com.inexture.users.validator.UpdateUserRequestValidator;
 import com.jayway.jsonpath.JsonPath;
 
 @WebMvcTest(UserController.class)
@@ -380,8 +366,7 @@ class UserControllerTest extends BaseControllerTest{
 		AddressPojo address = new AddressPojo();
 		address.setStreet("Test Street");
 		address.setCity("Test");
-		address.setPincode("000000");
-		address.setPincode("396580");
+		address.setPincode(396580);
 		userPojo.getAddresses().add(address);
 		return userPojo;
 	}

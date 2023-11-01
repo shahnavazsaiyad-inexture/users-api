@@ -46,7 +46,7 @@ public class Address implements Serializable{
 	private String country;
 	
 	@Column(name = "pincode")
-	private String pincode;
+	private Integer pincode;
 	
 	
 }

@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.inexture.users.entity.User;
 import com.inexture.users.utils.ApplicationUtils;
 
@@ -14,6 +16,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Getter @Setter @NoArgsConstructor @ToString
+@JsonInclude(value = Include.NON_NULL)
 public class UserPojo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +28,7 @@ public class UserPojo implements Serializable{
 	private String email;
 	private String role;
 	private String password;
+	private String confirmPassword;
 
 	private List<AddressPojo> addresses;
 

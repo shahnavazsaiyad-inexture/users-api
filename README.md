@@ -13,6 +13,13 @@ Steps to setup project:
 5. Run project as Spring boot application or as Java application (Main class UsersApplication.java)
 
 
+Commands to run application from terminal:
+`mvn clean install -DskipTests`
+`mvn spring-boot:run`
+
+Commands to execute test cases from terminal:
+`mvn clean test`
+
 API endpoints:
 
 Register new User: /register	POST

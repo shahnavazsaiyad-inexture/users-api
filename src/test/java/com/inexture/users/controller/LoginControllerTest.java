@@ -10,19 +10,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.web.servlet.MockMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inexture.users.pojo.LoginRequest;
 import com.inexture.users.pojo.LoginResponse;
-import com.inexture.users.service.ResetPasswordTokenService;
-import com.inexture.users.service.UserService;
-import com.inexture.users.utils.ApplicationUtils;
-import com.inexture.users.utils.JwtUtility;
-import com.inexture.users.validator.LoginRequestValidator;
 
 @WebMvcTest(LoginController.class)
 class LoginControllerTest extends BaseControllerTest{

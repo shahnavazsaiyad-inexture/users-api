@@ -46,7 +46,7 @@ Create network: `docker network create users-network`
 Run MySQL container:  
 `docker run --name mysql-container --network users-network -e MYSQL_ROOT_PASSWORD=Mysql8@admin -d  mysql`
 
-Create Docker Image for users-api: 
+Create Docker Image for users-api:  (Change JDBC url in application.properties, update localhost with mysql-container (name of the mysql container))
 `docker build -t users-api .`
 
 Run container from image:  

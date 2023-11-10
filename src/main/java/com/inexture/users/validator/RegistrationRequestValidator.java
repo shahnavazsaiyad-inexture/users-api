@@ -63,19 +63,21 @@ public class RegistrationRequestValidator implements Validator {
 			else if(!Pattern.matches("[a-zA-Z]{1,}", user.getLastName())){
 				errors.rejectValue("lastName", "error.field.characters.only");
 			}
-			
-			if(ApplicationUtils.isEmpty(user.getPassword())) {
-				errors.rejectValue("password", "error.field.empty");
-			}
-			
-			if(ApplicationUtils.isEmpty(user.getConfirmPassword())) {
-				errors.rejectValue("confirmPassword", "error.field.empty");
-			}else {
-				if(!user.getPassword().equals(user.getConfirmPassword())) {
-					errors.rejectValue("confirmPassword", "error.confirm.password.not.same");
+
+			if(ApplicationUtils.isEmpty(user.getAuthServer())){
+				if(ApplicationUtils.isEmpty(user.getPassword())) {
+					errors.rejectValue("password", "error.field.empty");
+				}
+
+				if(ApplicationUtils.isEmpty(user.getConfirmPassword())) {
+					errors.rejectValue("confirmPassword", "error.field.empty");
+				}else {
+					if (!user.getPassword().equals(user.getConfirmPassword())) {
+						errors.rejectValue("confirmPassword", "error.confirm.password.not.same");
+					}
 				}
 			}
-			
+
 			if(ApplicationUtils.isEmpty(user.getAddresses())) {
 				errors.rejectValue("addresses","error.address.required");
 			}else {
@@ -97,7 +99,7 @@ public class RegistrationRequestValidator implements Validator {
 					if(ApplicationUtils.isEmpty(address.getCountry())) {
 						errors.rejectValue("addresses["+i+"].country", "error.country.empty");
 					}
-					
+
 				}
 			}
 			

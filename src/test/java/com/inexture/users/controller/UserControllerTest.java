@@ -47,7 +47,7 @@ class UserControllerTest extends BaseControllerTest{
 		when(userService.getAll()).thenReturn(userList);
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		MvcResult result = mockMvc.perform(get("/users").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 										.andExpect(status().isOk())
@@ -74,7 +74,7 @@ class UserControllerTest extends BaseControllerTest{
 		when(userService.getAll()).thenReturn(List.of());
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(get("/users").header(HttpHeaders.AUTHORIZATION, "Bearer "+token))
 				.andExpect(status().isOk())
@@ -98,7 +98,7 @@ class UserControllerTest extends BaseControllerTest{
 		when(userService.getAll()).thenReturn(userList);
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(get("/users").header(HttpHeaders.AUTHORIZATION, "Bearer "+token))
 				.andExpect(status().isOk())
@@ -124,7 +124,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(get("/users/2").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 				.andExpect(status().isOk())
@@ -150,7 +150,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(get("/users/2").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 				.andExpect(status().isOk())
@@ -175,7 +175,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(get("/users/2").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 				.andExpect(status().isOk())
@@ -200,7 +200,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(delete("/users/2").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 				.andExpect(status().isOk())
@@ -225,7 +225,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		DecodedJWT decodedToken = decodeToken(token);
 		
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		mockMvc.perform(delete("/users/1").header(HttpHeaders.AUTHORIZATION, "Bearer " + token))
 				.andExpect(status().isOk())
@@ -245,7 +245,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		String token = generateToken("user", "User", "2");
 		DecodedJWT decodedToken = decodeToken(token);
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		UserPojo userPojo = createUser(2);
 		
@@ -273,7 +273,7 @@ class UserControllerTest extends BaseControllerTest{
 		
 		String token = generateToken("user", "User", "2");
 		DecodedJWT decodedToken = decodeToken(token);
-		when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
+		//when(jwtUtility.decodeToken(any())).thenReturn(decodedToken);
 		
 		UserPojo userPojo = createUser(1);
 		

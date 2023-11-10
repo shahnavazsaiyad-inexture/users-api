@@ -8,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.inexture.users.service.ResetPasswordTokenService;
 import com.inexture.users.service.UserService;
 import com.inexture.users.utils.ApplicationUtils;
-import com.inexture.users.utils.JwtUtility;
 import com.inexture.users.validator.LoginRequestValidator;
 import com.inexture.users.validator.RegistrationRequestValidator;
 import com.inexture.users.validator.UpdateUserRequestValidator;
@@ -30,9 +29,7 @@ class BaseControllerTest {
 	
 	@MockBean
 	protected LoginRequestValidator loginRequestValidator;
-	
-	@MockBean
-	protected JwtUtility jwtUtility;
+
 	
 	@MockBean
 	protected ResetPasswordTokenService resetPasswordTokenService;

@@ -1,13 +1,16 @@
 package com.inexture.users.service.impl;
 
 import java.security.MessageDigest;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.inexture.users.entity.Address;
@@ -18,7 +21,6 @@ import com.inexture.users.pojo.LoginResponse;
 import com.inexture.users.pojo.UserPojo;
 import com.inexture.users.service.UserService;
 import com.inexture.users.utils.ApplicationUtils;
-import com.inexture.users.utils.JwtUtility;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -29,11 +31,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
 @Slf4j
-public class UserServiceImpl extends BaseService implements UserService {
-	
+public class UserServiceImpl extends BaseService implements UserService, UserDetailsService {
 
 	@Autowired
-	private JwtUtility jwtUtility;
+	private BCryptPasswordEncoder passwordEncoder;
+
 
 	/**
 	 * @see UserService#getAll()
@@ -76,7 +78,7 @@ public class UserServiceImpl extends BaseService implements UserService {
 	@Override
 	public boolean create(UserPojo userPojo) {
 		try {
-			String hashedPassword = ApplicationUtils.hashPassword(userPojo.getPassword());
+			String hashedPassword = applicationUtils.hashPassword(userPojo.getPassword());
 			userPojo.setPassword(hashedPassword);
 			
 			User user = userPojo.toEntity();
@@ -99,15 +101,15 @@ public class UserServiceImpl extends BaseService implements UserService {
 	public Optional<LoginResponse> login(LoginRequest loginRequest) {
 
 		try {
-			String encodedPassword = ApplicationUtils.hashPassword(loginRequest.getPassword());
-			loginRequest.setPassword(encodedPassword);
+//			String encodedPassword = applicationUtils.hashPassword(loginRequest.getPassword());
+//			loginRequest.setPassword(encodedPassword);
 			
 			Optional<User> user = userRepository.findByUsername(loginRequest.getUsername());
 
 			if(user.isPresent()
-					&& MessageDigest.isEqual(loginRequest.getPassword().getBytes(), user.get().getPassword().getBytes())) {
+					&& passwordEncoder.matches(loginRequest.getPassword(), user.get().getPassword())) {
 				
-				String token = jwtUtility.createToken(user.get().getUsername(), user.get().getRole(), user.get().getId().toString());
+				String token = "";//jwtUtility.createToken(user.get().getUsername(), user.get().getRole(), user.get().getId().toString());
 
 				LoginResponse loginResponse = LoginResponse.builder()
 														.userId(user.get().getId())
@@ -243,5 +245,12 @@ public class UserServiceImpl extends BaseService implements UserService {
 		return userPojo;
 	}
 
-
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		Optional<User> user = userRepository.findByUsername(username);
+		if(user.isEmpty()){
+			throw new UsernameNotFoundException("User does not exists!");
+		}
+		return new org.springframework.security.core.userdetails.User(user.get().getUsername(),user.get().getPassword(), Set.of(new SimpleGrantedAuthority(user.get().getRole())));
+	}
 }

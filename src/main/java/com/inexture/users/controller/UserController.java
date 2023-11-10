@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -54,11 +55,12 @@ public class UserController extends BaseController{
 	 * @return
 	 */
 	@GetMapping
+	@PreAuthorize("hasAuthority('Admin')")
 	public ResponseEntity<APIResponse> listUsers(HttpServletRequest request){
 		
 		try {
-			String role =  (String) request.getAttribute("role");
-			if(role.equalsIgnoreCase("Admin")) {
+//			String role =  (String) request.getAttribute("role");
+//			if(role.equalsIgnoreCase("Admin")) {
 				List<UserPojo> users = userService.getAll();
 				
 				if(ApplicationUtils.isEmpty(users)) {
@@ -66,11 +68,11 @@ public class UserController extends BaseController{
 				}
 
 				return ResponseEntity.ok(ApplicationUtils.generateResponse(false, users));
-			}
-			else {
-				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to access this service."));
-				
-			}
+//			}
+//			else {
+//				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to access this service."));
+//
+//			}
 			
 		}catch(Exception e) {
 			log.error(e.getMessage(), e);
@@ -88,10 +90,10 @@ public class UserController extends BaseController{
 	@GetMapping("/{userId}")
 	public ResponseEntity<APIResponse> getUserById(@PathVariable("userId") Integer userId, HttpServletRequest request){
 		try {
-			String role =  (String) request.getAttribute("role");
-			Integer sessionUserId = Integer.parseInt(request.getAttribute("userId").toString());
+//			String role =  (String) request.getAttribute("role");
+//			Integer sessionUserId = Integer.parseInt(request.getAttribute("userId").toString());
 			
-			if(role.equalsIgnoreCase("Admin") || userId.equals(sessionUserId)) {
+//			if(role.equalsIgnoreCase("Admin") || userId.equals(sessionUserId)) {
 				Optional<UserPojo> user = userService.getById(userId);
 				
 				if(user.isEmpty()) {
@@ -99,10 +101,10 @@ public class UserController extends BaseController{
 				}else {
 					return ResponseEntity.ok(ApplicationUtils.generateResponse(false, user.get()));
 				}
-			}
-			else {
-				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to access other users data."));
-			}
+//			}
+//			else {
+//				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to access other users data."));
+//			}
 			
 		}catch(Exception e) {
 			log.error(e.getMessage(), e);
@@ -126,19 +128,19 @@ public class UserController extends BaseController{
 		}
 		
 		try {
-			String role =  (String) request.getAttribute("role");
-			Integer sessionUserId = Integer.parseInt(request.getAttribute("userId").toString());
+//			String role =  (String) request.getAttribute("role");
+//			Integer sessionUserId = Integer.parseInt(request.getAttribute("userId").toString());
 			
-			if(role.equalsIgnoreCase("Admin") || userPojo.getId().equals(sessionUserId)) {
+//			if(role.equalsIgnoreCase("Admin") || userPojo.getId().equals(sessionUserId)) {
 				
 				boolean isUpdated = userService.update(userPojo);
 				if(isUpdated) {
 					return ResponseEntity.ok(ApplicationUtils.generateResponse(false, "User details updates successfully."));
 				}
-			}
-			else {
-				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to update other users data."));
-			}
+//			}
+//			else {
+//				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to update other users data."));
+//			}
 		}catch(Exception e) {
 			log.error(e.getMessage(), e);
 		}
@@ -154,21 +156,19 @@ public class UserController extends BaseController{
 	 */
 	@DeleteMapping("/{userId}")
 	public ResponseEntity<APIResponse> deleteUser(@PathVariable("userId") Integer userId, HttpServletRequest request){
-		
-		
+
 		try {
-			String role =  (String) request.getAttribute("role");
-			
-			if(role.equalsIgnoreCase("Admin") ) {
+//			String role =  (String) request.getAttribute("role");
+//			if(role.equalsIgnoreCase("Admin") ) {
 				
 				boolean isDeleted = userService.deleteById(userId);
 				if(isDeleted) {
 					return ResponseEntity.ok(ApplicationUtils.generateResponse(false, "User has been deleted."));
 				}
-			}
-			else {
-				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to delete user."));
-			}
+//			}
+//			else {
+//				return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "You are not authorized to delete user."));
+//			}
 		}catch(Exception e) {
 			log.error(e.getMessage(), e);
 		}

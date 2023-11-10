@@ -101,7 +101,7 @@ public class ResetPasswordTokenServiceImpl extends BaseService implements ResetP
 			if(token.isPresent()) {
 				if(!token.get().getIsUsed() && token.get().getValidTill().isAfter(LocalDateTime.now())) {
 					
-					String encodedPassword = ApplicationUtils.hashPassword(resetPasswordRequest.getNewPassword());
+					String encodedPassword = applicationUtils.hashPassword(resetPasswordRequest.getNewPassword());
 					User user = token.get().getUser();
 					user.setPassword(encodedPassword);
 					userRepository.save(user);

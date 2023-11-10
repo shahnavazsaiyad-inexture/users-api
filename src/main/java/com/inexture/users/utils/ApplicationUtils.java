@@ -11,6 +11,7 @@ import java.util.Objects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 
@@ -26,6 +27,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ApplicationUtils {
 
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	@Autowired
 	private MessageSource messageSource;
 
@@ -140,10 +143,8 @@ public class ApplicationUtils {
 	 * @return
 	 * @throws NoSuchAlgorithmException
 	 */
-	public static String hashPassword(String plainText) throws NoSuchAlgorithmException {
-		MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
-		
-		return new String(messageDigest.digest(plainText.getBytes()));
+	public String hashPassword(String plainText) throws NoSuchAlgorithmException {
+		return passwordEncoder.encode(plainText);
 	}
 
 	/**

@@ -29,6 +29,7 @@ public class UserPojo implements Serializable{
 	private String role;
 	private String password;
 	private String confirmPassword;
+	private String authServer;
 
 	private List<AddressPojo> addresses;
 

@@ -14,11 +14,18 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * This class is used to return JSON response on authentication failure so REST client do not receive a default HTML for login failure
+ */
 @Component
 public class AuthFailureHandler implements AuthenticationFailureHandler {
 
     @Autowired
     private ApplicationUtils applicationUtils;
+
+    /**
+     * @see AuthenticationFailureHandler#onAuthenticationFailure(HttpServletRequest, HttpServletResponse, AuthenticationException)
+     */
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

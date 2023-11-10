@@ -75,6 +75,12 @@ public class LoginController extends BaseController {
 //		return ResponseEntity.ok(ApplicationUtils.generateResponse(true, "Invalid credentials."));
 //	}
 
+	/**
+	 * This method defines endpoint to retrieve user details for currently logged in user
+	 *
+	 * @param principal
+	 * @return
+	 */
 	@GetMapping("/login/user")
 	public ResponseEntity<APIResponse> loginUser(@AuthenticationPrincipal Object principal){
 		String loginUser;

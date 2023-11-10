@@ -1,6 +1,7 @@
 package com.inexture.users.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -53,6 +54,9 @@ public class SecurityConfig  {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Value("${frontend.home.url}")
+    private String frontEndHomeUrl;
+
     /**
      * This method configures a security filters for spring security
      *
@@ -83,6 +87,11 @@ public class SecurityConfig  {
         return http.build();
     }
 
+    /**
+     * Defines bean of AuthenticationProvider for form login
+     *
+     * @return
+     */
     @Bean
     public AuthenticationProvider authProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -91,10 +100,14 @@ public class SecurityConfig  {
         return authenticationProvider;
     }
 
+    /**
+     * Defines bean of CORS related configuration
+     * @return
+     */
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000"));
+        corsConfiguration.setAllowedOrigins(List.of(frontEndHomeUrl));
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
         corsConfiguration.setAllowCredentials(true);

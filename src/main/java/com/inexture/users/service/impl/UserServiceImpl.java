@@ -245,6 +245,9 @@ public class UserServiceImpl extends BaseService implements UserService, UserDet
 		return userPojo;
 	}
 
+	/**
+	 * @see UserDetailsService#loadUserByUsername(String) 
+	 */
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		Optional<User> user = userRepository.findByUsername(username);

@@ -85,6 +85,11 @@ public class ApplicationConfig {
 	}
 
 
+	/**
+	 * This method defines a bean of passwordEncoder
+	 *
+	 * @return
+	 */
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder(10);
